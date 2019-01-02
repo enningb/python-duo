@@ -18,4 +18,6 @@ include .vscode/settings.json
 
 include tox.ini .travis.yml appveyor.yml
 
+recursive-include docs *.rst
+
 global-exclude *.py[cod] __pycache__ *.so *.dylib
