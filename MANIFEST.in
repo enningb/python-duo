@@ -13,6 +13,8 @@ include CHANGELOG.rst
 include CONTRIBUTING.rst
 include LICENSE
 include README.rst
+include .vscode
+include .vscode/settings.json
 
 include tox.ini .travis.yml appveyor.yml
 
