@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
+import os, sys
 
-import os
-
+sys.path.append(os.path.abspath('../src/duo'))
 
 extensions = [
     'sphinx.ext.autodoc',
@@ -18,7 +18,7 @@ extensions = [
 if os.getenv('SPELLCHECK'):
     extensions += 'sphinxcontrib.spelling',
     spelling_show_suggestions = True
-    spelling_lang = 'en_US'
+    spelling_lang = 'nl_NL'
 
 source_suffix = '.rst'
 master_doc = 'index'
