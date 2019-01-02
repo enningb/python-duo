@@ -1,7 +1,6 @@
 import numpy as np
 import pandas as pd
 
-
 examenkandidaten_url = 'https://duo.nl/open_onderwijsdata/images/06-examenkandidaten-en-geslaagden-2013-2018.csv'
 
 
