@@ -2,7 +2,8 @@
 from __future__ import unicode_literals
 import os, sys
 
-sys.path.append(os.path.abspath('../src/duo'))
+sys.path.insert(0, os.path.abspath(".."))
+
 
 extensions = [
     'sphinx.ext.autodoc',
@@ -23,7 +24,7 @@ if os.getenv('SPELLCHECK'):
 source_suffix = '.rst'
 master_doc = 'index'
 project = 'DUO'
-year = '2018'
+year = '2019'
 author = 'Bram Enning'
 copyright = '{0}, {1}'.format(year, author)
 version = release = '0.1.0'
