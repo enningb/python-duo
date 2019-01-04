@@ -1,30 +1,30 @@
 import numpy as np
 import pandas as pd
 
-examenkandidaten_url = 'https://duo.nl/open_onderwijsdata/images/06-examenkandidaten-en-geslaagden-2013-2018.csv'
+examenkandidaten_vo_url = 'https://duo.nl/open_onderwijsdata/images/06-examenkandidaten-en-geslaagden-2013-2018.csv'
 
 
-def get_examenkandidaten(examenkandidaten_url=examenkandidaten_url):
-    """Download csv bestand van DUO"""
-    data = pd.read_csv(examenkandidaten_url, sep=";", encoding="latin1")
+def _examenkandidaten_vo_ruw(examenkandidaten_vo_url=examenkandidaten_vo_url):
+    """Download csv-bestand met gegevens over examenkandidaten vo van DUO"""
+    data = pd.read_csv(examenkandidaten_vo_url, sep=";", encoding="latin1")
     return data
 
 
-def select_columns_examenkandidaten():
+def _select_columns_examenkandidaten_vo():
     """Selecteer alleen die kolommen die we nodig hebben. Hier worden slaagpercentages
     verwijderd, dat is een tenslotte het resultaat van delen van geslaagden door examenkandidaten en worden
     de TOTAAL-kolommen verwijderd. Dat is tenslotte het resultaat van een sommering van de gegevens.
     Ook de ONBEKENDEN worden verwijderd, die zijn er niet of nauwelijks en leiden alleen maar af."""
 
     # lees data in:
-    data = get_examenkandidaten()
+    data = _examenkandidaten_vo_ruw()
     target_cols = [col for col in data.keys().tolist() if ((('GESLAAGDEN' in col) or ('EXAMENKAND' in col) or ('-')
                                                             not in col) and ('TOTAAL' not in col) and ('ONBEKEND' not in col))]
     result = data[target_cols].copy()
     return result
 
 
-def _examenkandidaten_en_geslaagden_op_een_regel(data):
+def _examenkandidaten_en_geslaagden_vo_op_een_regel(data):
     """Zet Geslaagden en Examenkandidaten op een regel."""
     fields = ['BRIN NUMMER',
               'VESTIGINGSNUMMER',
@@ -50,11 +50,11 @@ def _examenkandidaten_en_geslaagden_op_een_regel(data):
     return result
 
 
-def tidy_format_examenkandidaten():
+def examenkandidaten_vo():
     """Zet de tabel om naar tidy-format zonder informatieverlies. Er komen aparte kolommen voor
     Geslaagden en Examenkandidaten.
     """
-    data = select_columns_examenkandidaten()
+    data = _select_columns_examenkandidaten_vo()
     result = pd.melt(data, id_vars=['BRIN NUMMER', 'VESTIGINGSNUMMER', 'INSTELLINGSNAAM VESTIGING',
                                     'GEMEENTENAAM', 'ONDERWIJSTYPE VO', 'INSPECTIECODE', 'OPLEIDINGSNAAM'], value_name='Aantal')
 
@@ -78,7 +78,7 @@ def tidy_format_examenkandidaten():
     del result['variable']
     del result['Aantal']
 
-    tidy = _examenkandidaten_en_geslaagden_op_een_regel(result)
+    tidy = _examenkandidaten_en_geslaagden_vo_op_een_regel(result)
 
     tidy = tidy[tidy.Examenkandidaten > 0].copy()
 
