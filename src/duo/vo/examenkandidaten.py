@@ -1,5 +1,7 @@
+from duo.algemeen import generieke_kolomnamen
 import numpy as np
 import pandas as pd
+
 
 examenkandidaten_vo_url = 'https://duo.nl/open_onderwijsdata/images/06-examenkandidaten-en-geslaagden-2013-2018.csv'
 
@@ -34,7 +36,7 @@ def _examenkandidaten_en_geslaagden_vo_op_een_regel(data):
               'INSPECTIECODE',
               'OPLEIDINGSNAAM',
               'Geslacht',
-              'Cohort']
+              'Afstudeercohort']
 
     # maak een set met geslaagden
     geslaagden = data[data.Geslaagden.notnull()].copy()
@@ -69,10 +71,10 @@ def examenkandidaten_vo():
 
     # maak een tussentabel aan waarbij het eerste jaar wordt afgesplitst:
     jaren = result.variable.str.split('-', expand=True)
-    jaren['Cohort'] = jaren[0].str[-4:]
+    jaren['Afstudeercohort'] = jaren[0].str[-4:]
     # voeg het eerste jaar toe aan de resultaattabel:
-    result['Cohort'] = jaren.Cohort
-    assert result.Cohort.isnull().sum() == 0
+    result['Afstudeercohort'] = jaren.Afstudeercohort
+    assert result.Afstudeercohort.isnull().sum() == 0
 
     # verwijder de kolommen die we niet meer nodig hebben:
     del result['variable']
@@ -81,5 +83,5 @@ def examenkandidaten_vo():
     tidy = _examenkandidaten_en_geslaagden_vo_op_een_regel(result)
 
     tidy = tidy[tidy.Examenkandidaten > 0].copy()
-
+    tidy = tidy.rename(columns=generieke_kolomnamen)
     return tidy
