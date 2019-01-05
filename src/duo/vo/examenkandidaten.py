@@ -1,7 +1,7 @@
-from duo.algemeen import generieke_kolomnamen
 import numpy as np
 import pandas as pd
 
+from duo.algemeen import generieke_kolomnamen
 
 examenkandidaten_vo_url = 'https://duo.nl/open_onderwijsdata/images/06-examenkandidaten-en-geslaagden-2013-2018.csv'
 

@@ -1,8 +1,11 @@
-from duo.algemeen import generieke_kolomnamen
 import pandas as pd
 
+from duo.algemeen import generieke_kolomnamen
+
 gediplomeerden_mbo_url = ("https://duo.nl/open_onderwijsdata/images/10.-gediplomeerden-"
-"per-instelling%2C-plaats%2C-kenniscentrum%2C-sector%2C-sectorunit%2C-type-mbo%2C-opleiding%2C-niveau%2C-geslacht.csv")
+                          "per-instelling%2C-plaats%2C-kenniscentrum%2C-sector%2C-sectorunit%2C-type-mbo"
+                          "%2C-opleiding%2C-niveau%2C-geslacht.csv")
+
 
 def _gediplomeerden_mbo_bestand(gediplomeerden_mbo_url=gediplomeerden_mbo_url):
     """Lees bestand in met mbo-gediplomeerden van DUO-site"""
