@@ -13,9 +13,8 @@ def _examenkandidaten_vo_ruw(examenkandidaten_vo_url=examenkandidaten_vo_url):
 
 
 def _select_columns_examenkandidaten_vo():
-    """Selecteer alleen die kolommen die we nodig hebben. Hier worden slaagpercentages
-    verwijderd, dat is een tenslotte het resultaat van delen van geslaagden door examenkandidaten en worden
-    de TOTAAL-kolommen verwijderd. Dat is tenslotte het resultaat van een sommering van de gegevens.
+    """Verwijder slaagpercentages (dat is tenslotte het resultaat van delen van geslaagden door examenkandidaten.
+    Ook de TOTAAL-kolommen wordem verwijderd. Dat is tenslotte het resultaat van een sommering van de gegevens.
     Ook de ONBEKENDEN worden verwijderd, die zijn er niet of nauwelijks en leiden alleen maar af."""
 
     # lees data in:
@@ -36,15 +35,15 @@ def _examenkandidaten_en_geslaagden_vo_op_een_regel(data):
               'INSPECTIECODE',
               'OPLEIDINGSNAAM',
               'Geslacht',
-              'Afstudeercohort']
+              'Diplomajaar']
 
     # maak een set met geslaagden
-    geslaagden = data[data.Geslaagden.notnull()].copy()
+    geslaagden = data[data.Gediplomeerden.notnull()].copy()
     del geslaagden['Examenkandidaten']
 
     # maak een set met examenkandidaten
     ex_kandidaten = data[data.Examenkandidaten.notnull()].copy()
-    del ex_kandidaten['Geslaagden']
+    del ex_kandidaten['Gediplomeerden']
 
     # voeg ze samen
     result = pd.merge(ex_kandidaten, geslaagden, left_on=fields, right_on=fields, how='outer')
@@ -66,15 +65,15 @@ def examenkandidaten_vo():
 
     result['Examenkandidaten'] = np.where(result.variable.str.contains('EXAMENKANDIDATEN '), result.Aantal, np.nan)
     result['Examenkandidaten'] = pd.to_numeric(result.Examenkandidaten)
-    result['Geslaagden'] = np.where(result.variable.str.contains('GESLAAGDEN '), result.Aantal, np.nan)
-    result['Geslaagden'] = pd.to_numeric(result.Geslaagden)
+    result['Gediplomeerden'] = np.where(result.variable.str.contains('GESLAAGDEN '), result.Aantal, np.nan)
+    result['Gediplomeerden'] = pd.to_numeric(result.Gediplomeerden)
 
     # maak een tussentabel aan waarbij het eerste jaar wordt afgesplitst:
     jaren = result.variable.str.split('-', expand=True)
-    jaren['Afstudeercohort'] = jaren[0].str[-4:]
+    jaren['Diplomajaar'] = jaren[0].str[-4:]
     # voeg het eerste jaar toe aan de resultaattabel:
-    result['Afstudeercohort'] = jaren.Afstudeercohort
-    assert result.Afstudeercohort.isnull().sum() == 0
+    result['Diplomajaar'] = jaren.Diplomajaar
+    assert result.Diplomajaar.isnull().sum() == 0
 
     # verwijder de kolommen die we niet meer nodig hebben:
     del result['variable']
@@ -83,5 +82,7 @@ def examenkandidaten_vo():
     tidy = _examenkandidaten_en_geslaagden_vo_op_een_regel(result)
 
     tidy = tidy[tidy.Examenkandidaten > 0].copy()
+
+    tidy.Diplomajaar = tidy.Diplomajaar.astype(int)
     tidy = tidy.rename(columns=generieke_kolomnamen)
     return tidy

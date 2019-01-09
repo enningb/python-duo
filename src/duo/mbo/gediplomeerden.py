@@ -17,9 +17,9 @@ def gediplomeerden_mbo():
     """Maak de eerste data tabel in tidy format.
     De TOTAAL-kolommen worden verwijderd.
     De tabel wordt in tidy format gezet.
-    Kolommen voor Geslacht, Afstudeercohort en Gediplomeerden worden toevoegd.
+    Kolommen voor Geslacht, Diplomajaar en Gediplomeerden worden toevoegd.
 
-    Afstudeercohort wil zeggen dat studenten in het betreffende jaar het diploma hebben behaald.
+    Diplomajaar wil zeggen dat studenten in het betreffende collegejaar het diploma hebben behaald.
     """
     gediplomeerden_ruw = _gediplomeerden_mbo_bestand()
 
@@ -30,9 +30,9 @@ def gediplomeerden_mbo():
 
     tidy = pd.melt(gediplomeerden_ruw[target_cols], id_vars=id_vars, var_name='Variabele', value_name='Gediplomeerden')
 
-    # Maak een kolom Afstudeercohort:
-    tidy['Afstudeercohort'] = tidy.Variabele.str[-4:]
-    tidy['Afstudeercohort'] = pd.to_numeric(tidy['Afstudeercohort'], errors='coerce')
+    # Maak een kolom Diplomajaar:
+    tidy['Diplomajaar'] = tidy.Variabele.str[-4:]
+    tidy['Diplomajaar'] = pd.to_numeric(tidy['Diplomajaar'], errors='coerce')
     # Maak een kolom geslacht:
     tidy['Geslacht'] = tidy.Variabele.str[-7:-4]
     tidy['Geslacht'] = tidy['Geslacht'].replace({'MAN': 'Man', 'VRW': 'Vrouw'})
@@ -41,8 +41,9 @@ def gediplomeerden_mbo():
     del tidy['Variabele']
     # Verwijder rijen waarbij Gediplomeerden leeg is of 0:
     tidy.dropna(subset=['Gediplomeerden'], inplace=True)
-    result = tidy[tidy.Gediplomeerden != 0].copy()
 
+    result = tidy[tidy.Gediplomeerden != 0].copy()
+    result.Diplomajaar = result.Diplomajaar.astype(int)
     # Geef kolommen  generieke namen:
     result = result.rename(columns=generieke_kolomnamen)
     return result
