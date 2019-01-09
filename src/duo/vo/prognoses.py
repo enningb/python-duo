@@ -38,7 +38,7 @@ def prognoses_vo():
     tidy['Studiejaar'] = extra.Studiejaar
     tidy['Studiejaar'] = tidy.Studiejaar.astype(int)
     tidy['Aantal'] = pd.to_numeric(tidy.Aantal, errors='coerce')
-    
+
     # Sommige aantallen zijn prognoses, sommmige zijn reeel:
     tidy['TypeAantal'] = np.where(tidy.Studiejaar < eerste_prognose_jaar, 'ReëleAantal', 'Prognose')
 
