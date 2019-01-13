@@ -23,10 +23,10 @@ def read(*names, **kwargs):
 
 
 setup(
-    name='duo',
+    name='duo-data',
     version='0.1.3',
     license='MIT license',
-    description='A package that extracts data from Dienst Uitvoering Onderwijs.',
+    description='A package that extracts data from Dienst Uitvoering Onderwijs (DUO).',
     long_description='%s\n%s' % (
         re.compile('^.. start-badges.*^.. end-badges', re.M | re.S).sub('', read('README.rst')),
         re.sub(':[a-z]+:`~?(.*?)`', r'``\1``', read('CHANGELOG.rst'))
