@@ -14,7 +14,7 @@ def _prognoses_vo_bestand(prognoses_vo_url=prognoses_vo_url):
 
 
 def prognoses_vo():
-    """"Prognoses van VO."""
+    """"Prognoses voor aantal studenten in voortgezet onderwijs."""
     data = _prognoses_vo_bestand()
 
     # Maak een lijst met namen van kolommen, zonder TOTAAL:

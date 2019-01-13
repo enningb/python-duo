@@ -1,11 +1,11 @@
 import pandas as pd
 
 from duo.mbo.gediplomeerden import gediplomeerden_mbo
-from duo.vo.examenkandidaten import examenkandidaten_vo
+from duo.vo.examenkandidaten import examenkandidaten_gediplomeerden_vo
 
 
 def mbo4_toestroom_per_jaar_brin():
-    """MBO4 gediplomeerden per jaar per brin."""
+    """MBO gediplomeerden per jaar per brin met kwalificatieniveau 4"""
     data = gediplomeerden_mbo()
     filter_mbo4 = data.Kwalificatieniveau == 4
     data['Instroomcohort'] = data.Diplomajaar + 1
@@ -16,7 +16,7 @@ def mbo4_toestroom_per_jaar_brin():
 
 
 def havo_vwo_toestroom_per_jaar_brin():
-    data = examenkandidaten_vo()
+    data = examenkandidaten_gediplomeerden_vo()
     data['Instroomcohort'] = data.Diplomajaar + 1
     data['Vooropleiding'] = data['Onderwijstype'].replace({'HAVO': 'havo', 'VWO': 'vwo'})
     filter_havo_vwo = data.Onderwijstype.isin(['HAVO', 'VWO'])

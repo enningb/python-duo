@@ -8,7 +8,7 @@ in [tidy-format](http://vita.had.co.nz/papers/tidy-data.html)
 
 .. testsetup::
 
-    from duo.examenkandidaten import *
+    from duo.vo.examenkandidaten import 
 
 .. automodule:: duo.vo.examenkandidaten
     :members:

@@ -3,7 +3,13 @@ duo
 
 .. testsetup::
 
-    from duo import *
+    from duo.vo.examenkandidaten import examenkandidaten_vo
 
-.. automodule:: duo
+.. automodule:: duo.vo.examenkandidaten
+    :members:
+
+.. automodule:: duo.mbo.gediplomeerden
+    :members:
+
+.. automodule:: duo.hbo.toestroom
     :members:

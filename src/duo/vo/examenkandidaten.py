@@ -3,29 +3,29 @@ import pandas as pd
 
 from duo.algemeen import generieke_kolomnamen
 
-examenkandidaten_vo_url = 'https://duo.nl/open_onderwijsdata/images/06-examenkandidaten-en-geslaagden-2013-2018.csv'
+examenkandidaten_geslaagden_vo_url = 'https://duo.nl/open_onderwijsdata/images/06-examenkandidaten-en-geslaagden-2013-2018.csv'
 
 
-def _examenkandidaten_vo_ruw(examenkandidaten_vo_url=examenkandidaten_vo_url):
+def _examenkandidaten_geslaagden_vo_ruw(examenkandidaten_geslaagden_vo_url=examenkandidaten_geslaagden_vo_url):
     """Download csv-bestand met gegevens over examenkandidaten vo van DUO"""
-    data = pd.read_csv(examenkandidaten_vo_url, sep=";", encoding="latin1")
+    data = pd.read_csv(examenkandidaten_geslaagden_vo_url, sep=";", encoding="latin1")
     return data
 
 
-def _select_columns_examenkandidaten_vo():
-    """Verwijder slaagpercentages (dat is tenslotte het resultaat van delen van geslaagden door examenkandidaten.
+def _select_columns_examenkandidaten_geslaagden_vo():
+    """Verwijder slaagpercentages (dat is tenslotte het resultaat van delen van gediplomeerden door examenkandidaten.
     Ook de TOTAAL-kolommen wordem verwijderd. Dat is tenslotte het resultaat van een sommering van de gegevens.
     Ook de ONBEKENDEN worden verwijderd, die zijn er niet of nauwelijks en leiden alleen maar af."""
 
     # lees data in:
-    data = _examenkandidaten_vo_ruw()
+    data = _examenkandidaten_geslaagden_vo_ruw()
     target_cols = [col for col in data.keys().tolist() if ((('GESLAAGDEN' in col) or ('EXAMENKAND' in col) or ('-')
                                                             not in col) and ('TOTAAL' not in col) and ('ONBEKEND' not in col))]
     result = data[target_cols].copy()
     return result
 
 
-def _examenkandidaten_en_geslaagden_vo_op_een_regel(data):
+def _examenkandidaten_en_gediplomeerden_vo_op_een_regel(data):
     """Zet Geslaagden en Examenkandidaten op een regel."""
     fields = ['BRIN NUMMER',
               'VESTIGINGSNUMMER',
@@ -51,11 +51,11 @@ def _examenkandidaten_en_geslaagden_vo_op_een_regel(data):
     return result
 
 
-def examenkandidaten_vo():
-    """Zet de tabel om naar tidy-format zonder informatieverlies. Er komen aparte kolommen voor
-    Geslaagden en Examenkandidaten.
+def examenkandidaten_gediplomeerden_vo():
+    """Tabel met Gediplomeerden en Examenkandidaten per Brin, Vestiging, Onderwijstype
+    en Gemeente.
     """
-    data = _select_columns_examenkandidaten_vo()
+    data = _select_columns_examenkandidaten_geslaagden_vo()
     result = pd.melt(data, id_vars=['BRIN NUMMER', 'VESTIGINGSNUMMER', 'INSTELLINGSNAAM VESTIGING',
                                     'GEMEENTENAAM', 'ONDERWIJSTYPE VO', 'INSPECTIECODE', 'OPLEIDINGSNAAM'], value_name='Aantal')
 
@@ -79,7 +79,7 @@ def examenkandidaten_vo():
     del result['variable']
     del result['Aantal']
 
-    tidy = _examenkandidaten_en_geslaagden_vo_op_een_regel(result)
+    tidy = _examenkandidaten_en_gediplomeerden_vo_op_een_regel(result)
 
     tidy = tidy[tidy.Examenkandidaten > 0].copy()
 
