@@ -6,6 +6,7 @@ gediplomeerden_mbo_url = ("https://duo.nl/open_onderwijsdata/images/10.-gediplom
                           "per-instelling%2C-plaats%2C-kenniscentrum%2C-sector%2C-sectorunit%2C-type-mbo"
                           "%2C-opleiding%2C-niveau%2C-geslacht.csv")
 
+gediplomeerden_mbo_url = "https://duo.nl/open_onderwijsdata/images/10-gediplomeerden-per-instelling-plaats-kenniscentrum-sector-bedrijfstak-type-mbo-opleiding-niveau-geslacht-2014-2018.csv"
 
 def _gediplomeerden_mbo_bestand(gediplomeerden_mbo_url=gediplomeerden_mbo_url):
     """Lees bestand in met mbo-gediplomeerden van DUO-site"""
@@ -20,6 +21,10 @@ def gediplomeerden_mbo():
     Kolommen voor Geslacht, Diplomajaar en Gediplomeerden worden toevoegd.
 
     Diplomajaar wil zeggen dat studenten in het betreffende collegejaar het diploma hebben behaald.
+    In het bronbestand worden kolommen gebruikt als DIPVRW2018. Het jaartal daarin wordt gebruikt als 
+    Diplomajaar. Echter, in het bestand dat op 1 oktober wordt gepubliceerd, bevat al de cijfers van 
+    collegejaar 2018. Dat kan natuurlijk niet. Bedoeld wordt het diplomajaar 2017 (zoals bevestigd door
+    DUO in een mail 9 mei 2018).
     """
     gediplomeerden_ruw = _gediplomeerden_mbo_bestand()
 
@@ -33,6 +38,7 @@ def gediplomeerden_mbo():
     # Maak een kolom Diplomajaar:
     tidy['Diplomajaar'] = tidy.Variabele.str[-4:]
     tidy['Diplomajaar'] = pd.to_numeric(tidy['Diplomajaar'], errors='coerce')
+    tidy['Diplomajaar'] = tidy['Diplomajaar'] - 1
     # Maak een kolom geslacht:
     tidy['Geslacht'] = tidy.Variabele.str[-7:-4]
     tidy['Geslacht'] = tidy['Geslacht'].replace({'MAN': 'Man', 'VRW': 'Vrouw'})

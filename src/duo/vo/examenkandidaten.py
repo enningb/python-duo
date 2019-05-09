@@ -4,7 +4,7 @@ import pandas as pd
 from duo.algemeen import generieke_kolomnamen
 
 examenkandidaten_geslaagden_vo_url = 'https://duo.nl/open_onderwijsdata/images/06-examenkandidaten-en-geslaagden-2013-2018.csv'
-
+examenkandidaten_geslaagden_vo_url = 'https://duo.nl/open_onderwijsdata/images/06-examenkandidaten-en-geslaagden-2013-2018.csv'
 
 def _examenkandidaten_geslaagden_vo_ruw(examenkandidaten_geslaagden_vo_url=examenkandidaten_geslaagden_vo_url):
     """Download csv-bestand met gegevens over examenkandidaten vo van DUO"""
