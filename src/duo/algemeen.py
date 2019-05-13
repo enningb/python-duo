@@ -1,3 +1,6 @@
+import googlemaps
+from datetime import datetime
+
 generieke_kolomnamen = {'BRIN NUMMER': "Brin",
                         'VESTIGINGSNUMMER': "Brinvolgnummer",
                         'INSTELLINGSNAAM VESTIGING': "NaamInstelling",

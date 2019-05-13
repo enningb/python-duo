@@ -1,8 +1,7 @@
 import pandas as pd
 
-from duo.mbo.gediplomeerden import gediplomeerden_mbo
-from duo.vo.examenkandidaten import examenkandidaten_gediplomeerden_vo
-
+from duo.mbo.gediplomeerden import gediplomeerden_mbo, _gediplomeerden_mbo_bestand, _schoolnamen_mbo
+from duo.vo.examenkandidaten import examenkandidaten_gediplomeerden_vo, _schoolnamen_vo
 
 def mbo4_toestroom_per_jaar_brin():
     """MBO gediplomeerden per jaar per brin met kwalificatieniveau 4"""
@@ -38,3 +37,26 @@ def toestroom_hbo():
 
     assert mbo4_per_jaar_brin.Instroomcohort.max() == havo_vwo_gediplomeerden_per_jaar_brin.Instroomcohort.max()
     return result
+
+
+def schoolnamen_mbo_vo():
+    """Een dataset met unieke brins. Per brin een schoolnaam en gemeente. Er is hierbij
+    flink ontdubbelt, dat betekent met name dat de plaatsnamen soms niet kloppen, soms wisselen 
+    besturen van vestigingsplaats. Er is alsvolgt ontdubbelt: mbo en vo zijn ieder
+    op brin ontdubbelt, het meest recente brin is gebruikt.
+    Daarna zijn mbo en vo samengevoegd en is nogmaals ontdubbeld. De gegevens van de vo zijn
+    overgenomen, die van mbo vervallen."""
+    
+    vo_namen = _schoolnamen_vo()
+    vo_namen['Type'] = 'vo'
+    
+    mbo_namen = _schoolnamen_mbo().rename(columns={'Plaats':'Gemeente'})
+    mbo_namen['Type'] = 'mbo'
+    # Voeg samen:
+    schoolnamen = pd.concat([vo_namen, mbo_namen], sort=False).sort_values(by=['Type'],ascending=False)
+    # ontdubbel (laat mbo vallen)
+    schoolnamen = schoolnamen.drop_duplicates(subset='Brin', keep='first')
+    # verwijder hulpkolom
+    del schoolnamen['Type']
+    
+    return schoolnamen

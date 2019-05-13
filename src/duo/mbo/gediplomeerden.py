@@ -13,7 +13,6 @@ def _gediplomeerden_mbo_bestand(gediplomeerden_mbo_url=gediplomeerden_mbo_url):
     data = pd.read_csv(gediplomeerden_mbo_url, sep=';', encoding='latin1')
     return data
 
-
 def gediplomeerden_mbo():
     """Maak de eerste data tabel in tidy format.
     De TOTAAL-kolommen worden verwijderd.
@@ -53,3 +52,11 @@ def gediplomeerden_mbo():
     # Geef kolommen  generieke namen:
     result = result.rename(columns=generieke_kolomnamen)
     return result
+
+def _schoolnamen_mbo():
+    """Tabel per brin-nummer, naam instelling en plaatsnaam. Er wordt gekozen voor de meest recente naam."""
+    fields = ['Brin','NaamInstelling','Plaats']
+    result = gediplomeerden_mbo()
+    result = result.sort_values(by=['Diplomajaar'], ascending=False).drop_duplicates(subset=['Brin'], keep='first')[fields]
+    return result
+

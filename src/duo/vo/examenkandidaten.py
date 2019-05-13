@@ -86,3 +86,10 @@ def examenkandidaten_gediplomeerden_vo():
     tidy.Diplomajaar = tidy.Diplomajaar.astype(int)
     tidy = tidy.rename(columns=generieke_kolomnamen)
     return tidy
+
+def _schoolnamen_vo():
+    """Tabel per brin-nummer, naam instelling en plaatsnaam. Er wordt gekozen voor de meest recente naam."""
+    fields = ['Brin','NaamInstelling','Gemeente']
+    result = examenkandidaten_gediplomeerden_vo()
+    result = result.sort_values(by=['Diplomajaar'], ascending=False).drop_duplicates(subset=['Brin'], keep='first')[fields]
+    return result
