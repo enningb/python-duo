@@ -40,10 +40,11 @@ def toestroom_hbo():
 
 
 def schoolnamen_mbo_vo():
-    """Een dataset met unieke brins. Per brin een schoolnaam en gemeente. Er is hierbij
-    flink ontdubbelt, dat betekent met name dat de plaatsnamen soms niet kloppen, soms wisselen 
-    besturen van vestigingsplaats. Er is alsvolgt ontdubbelt: mbo en vo zijn ieder
-    op brin ontdubbelt, het meest recente brin is gebruikt.
+    """Een dataset met unieke brins. Per brin een schoolnaam en gemeente. De brins van mbo en vo zijn samengevoegd
+    zodat er een tabel ontstaat met brin als sleutel. Er is hierbij
+    flink ontdubbeld, dat betekent met name dat de plaatsnamen soms niet kloppen, soms wisselen 
+    besturen van vestigingsplaats. Er is alsvolgt ontdubbeld: mbo en vo zijn de gegevens van het meest recente
+    brin gebruikt (van het meest recente jaar).
     Daarna zijn mbo en vo samengevoegd en is nogmaals ontdubbeld. De gegevens van de vo zijn
     overgenomen, die van mbo vervallen."""
     
@@ -59,4 +60,4 @@ def schoolnamen_mbo_vo():
     # verwijder hulpkolom
     del schoolnamen['Type']
     
-    return schoolnamen
+    return schoolnamen  
