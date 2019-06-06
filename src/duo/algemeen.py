@@ -1,5 +1,6 @@
 import googlemaps
 from datetime import datetime
+from duo.settings import google_api_key
 
 generieke_kolomnamen = {'BRIN NUMMER': "Brin",
                         'VESTIGINGSNUMMER': "Brinvolgnummer",
@@ -48,3 +49,42 @@ generieke_kolomnamen = {'BRIN NUMMER': "Brin",
                         'GEMIDDELD CIJFER CENTRAAL EXAMEN': 'GemiddeldCijferCentraalExamen',
                         'GEMIDDELD CIJFER CIJFERLIJST': 'GemiddeldCijferCijferlijst'
                         }
+
+def get_distance_to_hsl(series, destination='Hogeschool Leiden, Leiden', google_api_key=google_api_key):
+    """Haalt reisafstand en reistijd op bij Google."""
+    result=series
+    gmaps = googlemaps.Client(key=google_api_key)
+    
+    try:
+        googleresult = gmaps.distance_matrix(origins=series.NaamInstelling + ', ' + series.Gemeente
+                     , destinations=destination
+                     , mode='transit'
+                     , language='nl'
+                     , units='metrics'
+                     , arrival_time=datetime(2019, 5, 9, 8, 30, 0)
+                              )
+        result['StatusGoogleAfstand'] = googleresult['status']
+        result['test'] = 'test'
+        result['OvAfstandMeter'] = googleresult['rows'][0]['elements'][0]['distance']['value']
+        result['OvAfstand'] = googleresult['rows'][0]['elements'][0]['distance']['text']
+        result['OvReistijdSeconden'] = googleresult['rows'][0]['elements'][0]['duration']['value']
+        result['OvReistijd'] = googleresult['rows'][0]['elements'][0]['duration']['text']
+    except:
+        try:
+            googleresult = gmaps.distance_matrix(origins=series.Gemeente
+             , destinations='Hogeschool Leiden, Leiden'
+             , mode='transit'
+             , language='nl'
+             , units='metrics'
+             , arrival_time=datetime(2019, 5, 9, 8, 30, 0)
+                              )
+            result['StatusGoogleAfstand'] = googleresult['status']
+            result['test'] = 'test'
+            result['OvAfstandMeter'] = googleresult['rows'][0]['elements'][0]['distance']['value']
+            result['OvAfstand'] = googleresult['rows'][0]['elements'][0]['distance']['text']
+            result['OvReistijdSeconden'] = googleresult['rows'][0]['elements'][0]['duration']['value']
+            result['OvReistijd'] = googleresult['rows'][0]['elements'][0]['duration']['text']
+        except:
+            result['StatusGoogleAfstand'] = 'Er ging iets mis'
+    finally:
+        return result
