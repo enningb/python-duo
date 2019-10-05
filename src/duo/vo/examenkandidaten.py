@@ -19,11 +19,12 @@ def _select_columns_examenkandidaten_geslaagden_vo():
 
     # lees data in:
     data = _examenkandidaten_geslaagden_vo_ruw()
+    # Maak een lijst met kolommen die we willen bewaren. 
     target_cols = [col for col in data.keys().tolist() if ((('GESLAAGDEN' in col) or ('EXAMENKAND' in col) or ('-')
                                                             not in col) and ('TOTAAL' not in col) and ('ONBEKEND' not in col))]
+    # Beperk de dataset tot de kolommen die we willen hebben.
     result = data[target_cols].copy()
     return result
-
 
 def _examenkandidaten_en_gediplomeerden_vo_op_een_regel(data):
     """Zet Geslaagden en Examenkandidaten op een regel."""
@@ -88,7 +89,7 @@ def examenkandidaten_gediplomeerden_vo():
     return tidy
 
 def _schoolnamen_vo():
-    """Tabel per brin-nummer, naam instelling en plaatsnaam. Er wordt gekozen voor de meest recente naam."""
+    """Tabel per brin-nummer, naam instelling en plaatsnaam. Er wordt gekozen voor de meest recente naam (basis van diplomajaar)."""
     fields = ['Brin','NaamInstelling','Gemeente']
     result = examenkandidaten_gediplomeerden_vo()
     result = result.sort_values(by=['Diplomajaar'], ascending=False).drop_duplicates(subset=['Brin'], keep='first')[fields]
