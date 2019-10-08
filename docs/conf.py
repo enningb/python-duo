@@ -32,14 +32,14 @@ version = release = '0.2.0'
 pygments_style = 'trac'
 templates_path = ['.']
 extlinks = {
-    'issue': ('https://github.com/enningb/python-duodata/issues/%s', '#'),
-    'pr': ('https://github.com/enningb/python-duodata/pull/%s', 'PR #'),
+    'issue': ('https://github.com/enningb/python-duo/issues/%s', '#'),
+    'pr': ('https://github.com/enningb/python-duo/pull/%s', 'PR #'),
 }
 import sphinx_py3doc_enhanced_theme
 html_theme = "sphinx_py3doc_enhanced_theme"
 html_theme_path = [sphinx_py3doc_enhanced_theme.get_html_theme_path()]
 html_theme_options = {
-    'githuburl': 'https://github.com/enningb/python-duodata/'
+    'githuburl': 'https://github.com/enningb/python-duo/'
 }
 
 html_use_smartypants = True
