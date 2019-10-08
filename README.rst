@@ -25,9 +25,9 @@ Overview
     :alt: PyPI Package latest release
     :target: https://pypi.org/project/duodata
 
-.. |commits-since| image:: https://img.shields.io/github/commits-since/enningb/python-duodata/v0.1.3.svg
+.. |commits-since| image:: https://img.shields.io/github/commits-since/enningb/python-duodata/v0.2.0.svg
     :alt: Commits since latest release
-    :target: https://github.com/enningb/python-duodata/compare/v0.1.3...master
+    :target: https://github.com/enningb/python-duodata/compare/v0.2.0...master
 
 .. |wheel| image:: https://img.shields.io/pypi/wheel/duodata.svg
     :alt: PyPI Wheel
