@@ -5,6 +5,7 @@ from duo.algemeen import generieke_kolomnamen
 
 url = 'https://duo.nl/open_onderwijsdata/databestanden/vo/leerlingen/leerlingen-vo-7.jsp'
 
+
 def target_urls(url=url):
     """Lijst met urls naar xlsx bestanden."""
     response = requests.get(url)
@@ -18,13 +19,15 @@ def target_urls(url=url):
     result = [link for link in links if link.endswith('.xlsx')]
     return result
 
-def jaar_cijfers(asset_url, base_url = 'https://duo.nl'):
-    """Lees excel in in dataframe, voeg Afstudeerjaar toe op basis van 
+
+def jaar_cijfers(asset_url, base_url='https://duo.nl'):
+    """Lees excel in in dataframe, voeg Afstudeerjaar toe op basis van
     collegejaar in url."""
     url = base_url + asset_url
     result = pd.read_excel(url)
     result['Afstudeerjaar'] = url[1][61:-10]
     return result
+
 
 def cijfers_alle_jaren():
     """Alle cijfers van de beschikbare jaren."""

@@ -6,22 +6,25 @@ gediplomeerden_mbo_url = ("https://duo.nl/open_onderwijsdata/images/10.-gediplom
                           "per-instelling%2C-plaats%2C-kenniscentrum%2C-sector%2C-sectorunit%2C-type-mbo"
                           "%2C-opleiding%2C-niveau%2C-geslacht.csv")
 
-gediplomeerden_mbo_url = "https://duo.nl/open_onderwijsdata/images/10-gediplomeerden-per-instelling-plaats-kenniscentrum-sector-bedrijfstak-type-mbo-opleiding-niveau-geslacht-2014-2018.csv"
+gediplomeerden_mbo_url = ("https://duo.nl/open_onderwijsdata/images/"
+                          "10-gediplomeerden-per-instelling-plaats-kenniscentrum-sector-bedrijfstak-type-"
+                          "mbo-opleiding-niveau-geslacht-2014-2018.csv")
+
 
 def _gediplomeerden_mbo_bestand(gediplomeerden_mbo_url=gediplomeerden_mbo_url):
     """Lees bestand in met mbo-gediplomeerden van DUO-site"""
     data = pd.read_csv(gediplomeerden_mbo_url, sep=';', encoding='latin1')
     return data
 
+
 def gediplomeerden_mbo():
     """Maak de eerste data tabel in tidy format.
     De TOTAAL-kolommen worden verwijderd.
     De tabel wordt in tidy format gezet.
     Kolommen voor Geslacht, Diplomajaar en Gediplomeerden worden toevoegd.
-
     Diplomajaar wil zeggen dat studenten in het betreffende collegejaar het diploma hebben behaald.
-    In het bronbestand worden kolommen gebruikt als DIPVRW2018. Het jaartal daarin wordt gebruikt als 
-    Diplomajaar. Echter, in het bestand dat op 1 oktober wordt gepubliceerd, bevat al de cijfers van 
+    In het bronbestand worden kolommen gebruikt als DIPVRW2018. Het jaartal daarin wordt gebruikt als
+    Diplomajaar. Echter, in het bestand dat op 1 oktober wordt gepubliceerd, bevat al de cijfers van
     collegejaar 2018. Dat kan natuurlijk niet. Bedoeld wordt het diplomajaar 2017 (zoals bevestigd door
     DUO in een mail 9 mei 2018).
     """
@@ -53,10 +56,10 @@ def gediplomeerden_mbo():
     result = result.rename(columns=generieke_kolomnamen)
     return result
 
+
 def _schoolnamen_mbo():
     """Tabel per brin-nummer, naam instelling en plaatsnaam. Er wordt gekozen voor de meest recente naam."""
-    fields = ['Brin','NaamInstelling','Plaats']
+    fields = ['Brin', 'NaamInstelling', 'Plaats']
     result = gediplomeerden_mbo()
     result = result.sort_values(by=['Diplomajaar'], ascending=False).drop_duplicates(subset=['Brin'], keep='first')[fields]
     return result
-
