@@ -23,7 +23,7 @@ def read(*names, **kwargs):
 
 
 setup(
-    name='duo-data',
+    name='duodata',
     version='0.1.3',
     license='MIT license',
     description='A package that extracts data from Dienst Uitvoering Onderwijs (DUO).',
@@ -75,7 +75,7 @@ setup(
     },
     entry_points={
         'console_scripts': [
-            'duo = duo.cli:main',
+            'duodata = duodata.cli:main',
         ]
     },
 )
