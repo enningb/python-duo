@@ -4,4 +4,4 @@ Installation
 
 At the command line::
 
-    pip install duo
+    pip install duodata

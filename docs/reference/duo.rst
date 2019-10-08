@@ -1,15 +1,15 @@
-duo
+duodata
 ===
 
 .. testsetup::
 
-    from duo.vo.examenkandidaten import examenkandidaten_vo
+    from duodata.vo.examenkandidaten import examenkandidaten_vo
 
-.. automodule:: duo.vo.examenkandidaten
+.. automodule:: duodata.vo.examenkandidaten
     :members:
 
-.. automodule:: duo.mbo.gediplomeerden
+.. automodule:: duodata.mbo.gediplomeerden
     :members:
 
-.. automodule:: duo.hbo.toestroom
+.. automodule:: duodata.hbo.toestroom
     :members:

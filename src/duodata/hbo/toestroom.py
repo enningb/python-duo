@@ -1,7 +1,7 @@
 import pandas as pd
 
-from duo.mbo.gediplomeerden import gediplomeerden_mbo, _schoolnamen_mbo
-from duo.vo.examenkandidaten import examenkandidaten_gediplomeerden_vo, _schoolnamen_vo
+from duodata.mbo.gediplomeerden import gediplomeerden_mbo, _schoolnamen_mbo
+from duodata.vo.examenkandidaten import examenkandidaten_gediplomeerden_vo, _schoolnamen_vo
 
 
 def mbo4_toestroom_per_jaar_brin():

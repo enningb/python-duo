@@ -16,30 +16,30 @@ Overview
       - | |version| |wheel| |supported-versions| |supported-implementations|
         | |commits-since|
 
-.. |docs| image:: https://readthedocs.org/projects/python-duo/badge/?style=flat
-    :target: https://readthedocs.org/projects/python-duo
+.. |docs| image:: https://readthedocs.org/projects/python-duodata/badge/?style=flat
+    :target: https://readthedocs.org/projects/python-duodata
     :alt: Documentation Status
 
 
-.. |version| image:: https://img.shields.io/pypi/v/duo.svg
+.. |version| image:: https://img.shields.io/pypi/v/duodata.svg
     :alt: PyPI Package latest release
-    :target: https://pypi.org/project/duo
+    :target: https://pypi.org/project/duodata
 
-.. |commits-since| image:: https://img.shields.io/github/commits-since/enningb/python-duo/v0.1.3.svg
+.. |commits-since| image:: https://img.shields.io/github/commits-since/enningb/python-duodata/v0.1.3.svg
     :alt: Commits since latest release
-    :target: https://github.com/enningb/python-duo/compare/v0.1.3...master
+    :target: https://github.com/enningb/python-duodata/compare/v0.1.3...master
 
-.. |wheel| image:: https://img.shields.io/pypi/wheel/duo.svg
+.. |wheel| image:: https://img.shields.io/pypi/wheel/duodata.svg
     :alt: PyPI Wheel
-    :target: https://pypi.org/project/duo
+    :target: https://pypi.org/project/duodata
 
-.. |supported-versions| image:: https://img.shields.io/pypi/pyversions/duo.svg
+.. |supported-versions| image:: https://img.shields.io/pypi/pyversions/duodata.svg
     :alt: Supported versions
-    :target: https://pypi.org/project/duo
+    :target: https://pypi.org/project/duodata
 
-.. |supported-implementations| image:: https://img.shields.io/pypi/implementation/duo.svg
+.. |supported-implementations| image:: https://img.shields.io/pypi/implementation/duodata.svg
     :alt: Supported implementations
-    :target: https://pypi.org/project/duo
+    :target: https://pypi.org/project/duodata
 
 
 .. end-badges
@@ -53,13 +53,13 @@ Installation
 
 ::
 
-    pip install duo
+    pip install duodata
 
 Documentation
 =============
 
 
-https://python-duo.readthedocs.io/
+https://python-duodata.readthedocs.io/
 
 
 Development

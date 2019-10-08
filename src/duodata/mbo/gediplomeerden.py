@@ -1,18 +1,18 @@
 import pandas as pd
 
-from duo.algemeen import generieke_kolomnamen
+from duodata.algemeen import generieke_kolomnamen
 
-gediplomeerden_mbo_url = ("https://duo.nl/open_onderwijsdata/images/10.-gediplomeerden-"
+gediplomeerden_mbo_url = ("https://duodata.nl/open_onderwijsdata/images/10.-gediplomeerden-"
                           "per-instelling%2C-plaats%2C-kenniscentrum%2C-sector%2C-sectorunit%2C-type-mbo"
                           "%2C-opleiding%2C-niveau%2C-geslacht.csv")
 
-gediplomeerden_mbo_url = ("https://duo.nl/open_onderwijsdata/images/"
+gediplomeerden_mbo_url = ("https://duodata.nl/open_onderwijsdata/images/"
                           "10-gediplomeerden-per-instelling-plaats-kenniscentrum-sector-bedrijfstak-type-"
                           "mbo-opleiding-niveau-geslacht-2014-2018.csv")
 
 
 def _gediplomeerden_mbo_bestand(gediplomeerden_mbo_url=gediplomeerden_mbo_url):
-    """Lees bestand in met mbo-gediplomeerden van DUO-site"""
+    """Lees bestand in met mbo-gediplomeerden van duodata-site"""
     data = pd.read_csv(gediplomeerden_mbo_url, sep=';', encoding='latin1')
     return data
 
@@ -26,7 +26,7 @@ def gediplomeerden_mbo():
     In het bronbestand worden kolommen gebruikt als DIPVRW2018. Het jaartal daarin wordt gebruikt als
     Diplomajaar. Echter, in het bestand dat op 1 oktober wordt gepubliceerd, bevat al de cijfers van
     collegejaar 2018. Dat kan natuurlijk niet. Bedoeld wordt het diplomajaar 2017 (zoals bevestigd door
-    DUO in een mail 9 mei 2018).
+    duodata in een mail 9 mei 2018).
     """
     gediplomeerden_ruw = _gediplomeerden_mbo_bestand()
 

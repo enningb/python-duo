@@ -1,4 +1,4 @@
 from sqlalchemy import create_engine
-from duo.settings import duo_data_dir
+from duodata.settings import duodata_data_dir
 
-local_db = create_engine('sqlite:///%s/duo_data.db' % duo_data_dir)
+local_db = create_engine('sqlite:///%s/duodata_data.db' % duodata_data_dir)

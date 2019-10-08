@@ -23,7 +23,7 @@ if os.getenv('SPELLCHECK'):
 
 source_suffix = '.rst'
 master_doc = 'index'
-project = 'DUO'
+project = 'duodata'
 year = '2019'
 author = 'Bram Enning'
 copyright = '{0}, {1}'.format(year, author)
@@ -32,14 +32,14 @@ version = release = '0.1.3'
 pygments_style = 'trac'
 templates_path = ['.']
 extlinks = {
-    'issue': ('https://github.com/enningb/python-duo/issues/%s', '#'),
-    'pr': ('https://github.com/enningb/python-duo/pull/%s', 'PR #'),
+    'issue': ('https://github.com/enningb/python-duodata/issues/%s', '#'),
+    'pr': ('https://github.com/enningb/python-duodata/pull/%s', 'PR #'),
 }
 import sphinx_py3doc_enhanced_theme
 html_theme = "sphinx_py3doc_enhanced_theme"
 html_theme_path = [sphinx_py3doc_enhanced_theme.get_html_theme_path()]
 html_theme_options = {
-    'githuburl': 'https://github.com/enningb/python-duo/'
+    'githuburl': 'https://github.com/enningb/python-duodata/'
 }
 
 html_use_smartypants = True

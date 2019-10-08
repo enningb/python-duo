@@ -1,6 +1,6 @@
 import googlemaps
 from datetime import datetime
-from duo.settings import google_api_key
+from duodata.settings import google_api_key
 
 generieke_kolomnamen = {'BRIN NUMMER': "Brin",
                         'VESTIGINGSNUMMER': "Brinvolgnummer",

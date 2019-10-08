@@ -23,17 +23,17 @@ def read(*names, **kwargs):
 
 
 setup(
-    name='duodata',
+    name='duodatadata',
     version='0.1.3',
     license='MIT license',
-    description='A package that extracts data from Dienst Uitvoering Onderwijs (DUO).',
+    description='A package that extracts data from Dienst Uitvoering Onderwijs (duodata).',
     long_description='%s\n%s' % (
         re.compile('^.. start-badges.*^.. end-badges', re.M | re.S).sub('', read('README.rst')),
         re.sub(':[a-z]+:`~?(.*?)`', r'``\1``', read('CHANGELOG.rst'))
     ),
     author='Bram Enning',
     author_email='bramenning@gmail.com',
-    url='https://github.com/enningb/python-duo',
+    url='https://github.com/enningb/python-duodata',
     packages=find_packages('src'),
     package_dir={'': 'src'},
     py_modules=[splitext(basename(path))[0] for path in glob('src/*.py')],
@@ -75,7 +75,7 @@ setup(
     },
     entry_points={
         'console_scripts': [
-            'duodata = duodata.cli:main',
+            'duodatadata = duodatadata.cli:main',
         ]
     },
 )

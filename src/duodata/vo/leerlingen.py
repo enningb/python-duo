@@ -1,9 +1,9 @@
 from bs4 import BeautifulSoup
 import pandas as pd
 import requests
-from duo.algemeen import generieke_kolomnamen
+from duodata.algemeen import generieke_kolomnamen
 
-url = 'https://duo.nl/open_onderwijsdata/databestanden/vo/leerlingen/leerlingen-vo-7.jsp'
+url = 'https://duodata.nl/open_onderwijsdata/databestanden/vo/leerlingen/leerlingen-vo-7.jsp'
 
 
 def target_urls(url=url):
@@ -20,7 +20,7 @@ def target_urls(url=url):
     return result
 
 
-def jaar_cijfers(asset_url, base_url='https://duo.nl'):
+def jaar_cijfers(asset_url, base_url='https://duodata.nl'):
     """Lees excel in in dataframe, voeg Afstudeerjaar toe op basis van
     collegejaar in url."""
     url = base_url + asset_url

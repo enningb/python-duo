@@ -2,6 +2,6 @@
 Usage
 =====
 
-To use DUO in a project::
+To use duodata in a project::
 
-	import duo
+	import duodata

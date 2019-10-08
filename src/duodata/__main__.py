@@ -1,5 +1,5 @@
 """
-Entrypoint module, in case you use `python -mduo`.
+Entrypoint module, in case you use `python -mduodata`.
 
 
 Why does this file exist, and why __main__? For more info, read:
@@ -10,7 +10,7 @@ Why does this file exist, and why __main__? For more info, read:
 """
 import sys
 
-from duo.cli import main
+from duodata.cli import main
 
 if __name__ == "__main__":
     sys.exit(main())
