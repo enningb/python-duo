@@ -4,7 +4,7 @@ import pandas as pd
 from duodata.algemeen import generieke_kolomnamen
 
 eerste_prognose_jaar = 2018
-prognoses_vo_url = "https://duodata.nl/open_onderwijsdata/images/11-leerlingenprognose-vo-2012-2037.csv"
+prognoses_vo_url = "https://duo.nl/open_onderwijsdata/images/11-leerlingenprognose-vo-2012-2037.csv"
 
 
 def _prognoses_vo_bestand(prognoses_vo_url=prognoses_vo_url):

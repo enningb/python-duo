@@ -6,7 +6,7 @@ gediplomeerden_mbo_url = ("https://duodata.nl/open_onderwijsdata/images/10.-gedi
                           "per-instelling%2C-plaats%2C-kenniscentrum%2C-sector%2C-sectorunit%2C-type-mbo"
                           "%2C-opleiding%2C-niveau%2C-geslacht.csv")
 
-gediplomeerden_mbo_url = ("https://duodata.nl/open_onderwijsdata/images/"
+gediplomeerden_mbo_url = ("https://duo.nl/open_onderwijsdata/images/"
                           "10-gediplomeerden-per-instelling-plaats-kenniscentrum-sector-bedrijfstak-type-"
                           "mbo-opleiding-niveau-geslacht-2014-2018.csv")
 

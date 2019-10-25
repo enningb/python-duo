@@ -3,7 +3,7 @@ import pandas as pd
 import requests
 from duodata.algemeen import generieke_kolomnamen
 
-url = 'https://duodata.nl/open_onderwijsdata/databestanden/vo/leerlingen/leerlingen-vo-7.jsp'
+url = 'https://duo.nl/open_onderwijsdata/databestanden/vo/leerlingen/leerlingen-vo-7.jsp'
 
 
 def target_urls(url=url):
