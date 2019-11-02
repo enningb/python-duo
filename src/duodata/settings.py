@@ -24,4 +24,3 @@ else:
     
     # Google API key
     google_api_key = 'THIS IS NOT A KEY'
-
