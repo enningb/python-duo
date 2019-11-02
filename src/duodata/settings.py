@@ -21,6 +21,6 @@ if os.path.exists(DUODATA_CONFIG):
 else:
     logging.error('Missing config-file: %s' % DUODATA_CONFIG)
     data_dir = os.path.join(os.path.expanduser('~'), 'duodata')
-    
+
     # Google API key
     google_api_key = 'THIS IS NOT A KEY'
