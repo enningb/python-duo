@@ -24,7 +24,7 @@ def read(*names, **kwargs):
 
 setup(
     name='duodata',
-    version='0.2.0',
+    version='0.2.1',
     license='MIT license',
     description='A package that extracts data from Dienst Uitvoering Onderwijs (DUO).',
     long_description='%s\n%s' % (

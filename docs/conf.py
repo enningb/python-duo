@@ -27,7 +27,7 @@ project = 'duodata'
 year = '2019'
 author = 'Bram Enning'
 copyright = '{0}, {1}'.format(year, author)
-version = release = '0.2.0'
+version = release = '0.2.1'
 
 pygments_style = 'trac'
 templates_path = ['.']
